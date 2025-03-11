@@ -6,29 +6,43 @@ let voiceSelect = document.querySelector("select");
 function loadVoices() {
     voices = window.speechSynthesis.getVoices();
     if (voices.length > 0) {
-        speech.voice = voices[0]; // Default to the first voice
         voiceSelect.innerHTML = ''; // Clear previous options
         voices.forEach((voice, i) => {
-            let option = new Option(voice.name, i);
-            voiceSelect.add(option);
+            let option = document.createElement("option");
+            option.value = i;
+            option.textContent = voice.name;
+            voiceSelect.appendChild(option);
         });
+        speech.voice = voices[0]; // Set default voice
     }
 }
 
-// Load voices when available
-if (window.speechSynthesis.onvoiceschanged !== undefined) {
-    window.speechSynthesis.onvoiceschanged = loadVoices;
-} else {
-    loadVoices();
+// Continuously check for voices until they are loaded
+function checkVoices() {
+    if (voices.length === 0) {
+        loadVoices();
+    }
 }
 
-// Change voice when a new option is selected
+// Call loadVoices immediately if voices are already available
+if (speechSynthesis.getVoices().length > 0) {
+    loadVoices();
+} else {
+    speechSynthesis.addEventListener('voiceschanged', loadVoices);
+}
+
+// Check for voices every 500ms if not loaded
+setInterval(checkVoices, 500);
+
+// Event listener for voice selection change
 voiceSelect.addEventListener("change", () => {
     speech.voice = voices[voiceSelect.value];
 });
 
-// Function of Listen button
+// Event listener for Listen button
 document.querySelector("button").addEventListener("click", () => {
     speech.text = document.querySelector("textarea").value;
-    window.speechSynthesis.speak(speech);
+    if (speech.text.trim() !== "") {
+        window.speechSynthesis.speak(speech);
+    }
 });
