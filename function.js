@@ -9,34 +9,23 @@ function loadVoices() {
         voiceSelect.innerHTML = ''; // Clear previous options
         voices.forEach((voice, i) => {
             let option = document.createElement("option");
-            option.value = i;
-            option.textContent = voice.name;
+            option.value = voice.name; // Use voice name instead of index
+            option.textContent = `${voice.name} (${voice.lang})`;
             voiceSelect.appendChild(option);
         });
         speech.voice = voices[0]; // Set default voice
     }
 }
 
-// Continuously check for voices until they are loaded
-function checkVoices() {
-    if (voices.length === 0) {
-        loadVoices();
-    }
+// Trigger loading voices
+if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = loadVoices;
 }
-
-// Call loadVoices immediately if voices are already available
-if (speechSynthesis.getVoices().length > 0) {
-    loadVoices();
-} else {
-    speechSynthesis.addEventListener('voiceschanged', loadVoices);
-}
-
-// Check for voices every 500ms if not loaded
-setInterval(checkVoices, 500);
 
 // Event listener for voice selection change
 voiceSelect.addEventListener("change", () => {
-    speech.voice = voices[voiceSelect.value];
+    const selectedVoiceName = voiceSelect.value;
+    speech.voice = voices.find(voice => voice.name === selectedVoiceName);
 });
 
 // Event listener for Listen button
