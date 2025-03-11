@@ -8,7 +8,7 @@ function loadVoices() {
 
     if (voices.length > 0) {
         voiceSelect.innerHTML = ''; // Clear previous options
-        
+
         voices.forEach((voice, index) => {
             let option = document.createElement("option");
             option.value = index; 
@@ -24,7 +24,7 @@ function loadVoices() {
 if (typeof speechSynthesis.onvoiceschanged !== "undefined") {
     speechSynthesis.onvoiceschanged = loadVoices;
 } else {
-    loadVoices(); // Load voices if the event doesn't fire
+    loadVoices();
 }
 
 // Event listener for Listen button
@@ -32,16 +32,19 @@ document.querySelector("button").addEventListener("click", () => {
     const selectedVoice = voices[voiceSelect.value];
     
     if (selectedVoice) {
-        speech.voice = selectedVoice; // Set the voice before speaking
-    }
+        window.speechSynthesis.cancel(); // Stop any ongoing speech
 
-    speech.text = document.querySelector("textarea").value;
+        // Recreate the speech object to avoid Android issues
+        speech = new SpeechSynthesisUtterance();
+        speech.text = document.querySelector("textarea").value;
+        speech.voice = selectedVoice; // Set the selected voice
+        speech.lang = selectedVoice.lang; // Important: Set the language of the speech to match the voice's language
 
-    if (speech.text.trim() !== "") {
-        window.speechSynthesis.cancel(); // Stop any previous speech
-        setTimeout(() => { // Adding a slight delay for Android compatibility
-            window.speechSynthesis.speak(speech); // Start speaking
-        }, 100);
+        if (speech.text.trim() !== "") {
+            setTimeout(() => { 
+                window.speechSynthesis.speak(speech);
+            }, 200); // Slight delay to ensure voice switching works properly
+        }
     }
 });
 
