@@ -6,7 +6,6 @@ This is a simple and interactive **Text-to-Speech Converter** web application bu
 - 🎤 Convert text to speech using Web Speech API.
 - 🌐 Support for multiple voices & languages.
 - 📱 Fully responsive design for various screen sizes.
-- 💡 Customizable styles with `style.css`.
 - 🔧 Simple and lightweight codebase.
 
 ---
@@ -18,11 +17,12 @@ You can see the live demo of this project : https://text-to-speech-converter-sel
 
 ## 📁 Project Structure
 ```
-|-- index.html          # HTML file for the interface
-|-- style.css           # CSS file for styling the interface
-|-- function.js         # JavaScript file for the speech synthesis functionality
-|-- playicon.png        # Play button icon (Make sure it's in the same folder)
-|-- README.md           # Project description (this file)
+|-- index.html              # HTML file for the interface
+|-- style.css               # CSS file for styling the interface
+|-- function.js             # JavaScript file for the speech synthesis functionality
+|-- playicon.png            # Play button icon 
+|-- README.md               # Project description 
+|-- DropdownArrow.png       # DropdownArrow icon
 ```
 
 ---
