@@ -7,7 +7,7 @@
 
 .hero{
     width: 100%;
-    min-height: 100vh; /*I am added*/
+    height: 100vh; /*I am added*/
     background: linear-gradient(45deg,#010758,#490d61);
     display: flex;
     align-items: center;
@@ -60,5 +60,155 @@ button{
     border: 0;
     outline: 0;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 
+}
+
+button img{
+    width: 26px;
+    margin-right: 10px;
+}
+
+select{
+    flex:1;
+    color: #fff;
+    background: #403d84;
+    height: 50px;
+    padding: 0 20px;
+    outline: 0;
+    border-radius: 35px;
+    appearance: none;
+    background-image: url(DownArrow.png);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position-x:400px;
+    background-position-y:50%;
+
+}
+
+@media(max-width:610px) {
+    #Heroheading {
+        font-size: 30px;  
+        font-weight: 400;
+    }
+
+    textarea {
+        width: 100%; 
+        max-width: 500px;  
+        height: 200px;  
+    }
+    .row{
+        width: 500px;
+    }
+    select{
+        background-size: 15px;
+    background-position-x:300px;
+    background-position-y:50%;
+    }
+}
+
+
+@media(max-width:515px) {
+    #Heroheading {
+        font-size: 25px;  
+        font-weight: 400;
+    }
+
+    textarea {
+        width: 90%; 
+        max-width: 500px;  
+        height: 200px;  
+    }
+    .row{
+        width: 400px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    select{
+    height: 50px;
+    width: 100%;
+    background-size: 15px;
+    background-position-x:265px;
+    background-position-y:50%;
+    }
+}
+@media(max-width:435px) {
+    .hero{
+        width: 102%;
+    }
+    #Heroheading {
+        font-size: 23px;  
+        font-weight: 400;
+    }
+
+    textarea {
+        width: 93%; 
+        max-width: 500px;  
+        height: 200px;  
+    }
+    .row{
+        width: 250px;
+        display: flex;
+        align-items: normal;
+        flex-wrap: wrap;
+        height: 100px;
+        
+    }
+    select{
+    height: 50px;
+    width: 100px;
+    font-size: 10px;
+    background-size: 15px;
+    background-position-x:220px;
+    background-position-y:50%;
+    }
+    button{
+        height: 50px;
+        width: 10;
+        position: relative;
+        left: 50px;
+    }
+}
+
+@media(max-width:265px) {
+    .hero{
+        width: 102%;
+    }
+    #Heroheading {
+        font-size: 13px;  
+        font-weight: 400;
+    }
+
+    textarea {
+        width: 93%; 
+        max-width: 500px;  
+        height: 200px;  
+    }
+    .row{
+        width: 150px;
+        display: flex;
+        align-items: normal;
+        flex-wrap: wrap;
+        height: 100px;
+    }
+    select{
+    height: 40px;
+    width: 50px;
+    font-size:6px;
+    background-size: 15px;
+    background-position-x:120px;
+    background-position-y:50%;
+    }
+    button{
+        height: 35px;
+        width: 100px;
+        position: relative;
+        left: 15px;
+        font-size: 10px;
+    }
+    button img{
+        width: 16px;
+        margin-right: 5px;
+    }
 }
